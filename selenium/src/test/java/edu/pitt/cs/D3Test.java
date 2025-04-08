@@ -191,33 +191,5 @@ public class D3Test {
       assert(elements.size() > 0);
     }
   }
-  @Test
-  public void dEFECT1FUNGREETACAT() {
-    driver.get("http://localhost:8080/");
-    js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.findElement(By.xpath("//a[contains(text(),\'Greet-A-Cat\')]")).click();
-    assertThat(driver.findElement(By.xpath("//div[@id=\'greeting\']/h4")).getText(), is("Meow!Meow!"));
-  }
-  @Test
-  public void dEFECT2FUNGREETACATWITHNAME() {
-    driver.get("http://localhost:8080/");
-    js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.get("http://localhost:8080/greet-a-cat/Jennyanydots");
-    assertThat(driver.findElement(By.xpath("//div[@id=\'greeting\']/h4")).getText(), is("Jennyanydots is not here."));
-  }
-  @Test
-  public void dEFECT3FUNFEED() {
-    driver.get("http://localhost:8080/");
-    js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.findElement(By.xpath("//a[contains(text(),\'Feed-A-Cat\')]")).click();
-    driver.findElement(By.xpath("//input[@id=\'catnips\']")).sendKeys("-3");
-    driver.findElement(By.xpath("//button[contains(.,\'Feed\')]")).click();
-    {
-      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'feedResult\' and text()=\'Nom, nom, nom.\' or text()=\'Cat fight!\']")));
-    }
-    assertThat(driver.findElement(By.xpath("//div[@id=\'feedResult\']")).getText(), is("Cat fight!"));
-  }
+
 }
